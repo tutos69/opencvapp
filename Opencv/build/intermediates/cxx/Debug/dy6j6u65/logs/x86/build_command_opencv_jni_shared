@@ -1,0 +1,4 @@
+/home/tutu/Android/Sdk/cmake/3.18.1/bin/ninja \
+  -C \
+  "/home/tutu/Escritorio/Octavo/Vision Por Computador/opencvapp/Opencv/.cxx/Debug/dy6j6u65/x86" \
+  opencv_jni_shared

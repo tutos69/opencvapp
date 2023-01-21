@@ -1,0 +1,2 @@
+ninja: Entering directory `/home/tutu/Escritorio/Octavo/Vision Por Computador/opencvapp/Opencv/.cxx/Debug/dy6j6u65/x86'
+ninja: no work to do.

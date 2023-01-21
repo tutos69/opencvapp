@@ -1,0 +1,18 @@
+/home/tutu/Android/Sdk/cmake/3.18.1/bin/cmake \
+  "-H/home/tutu/Escritorio/Octavo/Vision Por Computador/opencvapp/Opencv/libcxx_helper" \
+  -DCMAKE_SYSTEM_NAME=Android \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+  -DCMAKE_SYSTEM_VERSION=21 \
+  -DANDROID_PLATFORM=android-21 \
+  -DANDROID_ABI=x86 \
+  -DCMAKE_ANDROID_ARCH_ABI=x86 \
+  -DANDROID_NDK=/home/tutu/Android/Sdk/ndk/23.1.7779620 \
+  -DCMAKE_ANDROID_NDK=/home/tutu/Android/Sdk/ndk/23.1.7779620 \
+  -DCMAKE_TOOLCHAIN_FILE=/home/tutu/Android/Sdk/ndk/23.1.7779620/build/cmake/android.toolchain.cmake \
+  -DCMAKE_MAKE_PROGRAM=/home/tutu/Android/Sdk/cmake/3.18.1/bin/ninja \
+  "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/tutu/Escritorio/Octavo/Vision Por Computador/opencvapp/Opencv/build/intermediates/cxx/RelWithDebInfo/6a2v2a5b/obj/x86" \
+  "-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/home/tutu/Escritorio/Octavo/Vision Por Computador/opencvapp/Opencv/build/intermediates/cxx/RelWithDebInfo/6a2v2a5b/obj/x86" \
+  -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+  "-B/home/tutu/Escritorio/Octavo/Vision Por Computador/opencvapp/Opencv/.cxx/RelWithDebInfo/6a2v2a5b/x86" \
+  -GNinja \
+  -DANDROID_STL=c++_shared

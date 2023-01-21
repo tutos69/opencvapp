@@ -1,0 +1,1 @@
+/home/tutu/Escritorio/Octavo/Vision Por Computador/opencvapp/Opencv/build/intermediates/cxx/RelWithDebInfo/6a2v2a5b/obj/x86
