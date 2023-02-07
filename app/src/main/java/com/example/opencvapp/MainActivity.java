@@ -2,13 +2,15 @@ package com.example.opencvapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.opencvapp.databinding.ActivityMainBinding;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraActivity;
@@ -17,6 +19,10 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,13 +30,13 @@ public class MainActivity extends CameraActivity {
 
     private static String LOGtaf = "OpenCV_Log";
     private CameraBridgeViewBase mOpencv;
+    private File cascade;
     static {
         System.loadLibrary("opencvapp");
     }
-    public native void RedNeuronal(long gris, long color);
+    public native void DetectorDeCaras(String archivo);
+    public native void RedNeuronal2(long gris, long color);
 
-//
-//    private ActivityMainBinding binding;
 
 
     private BaseLoaderCallback mCargarC = new BaseLoaderCallback(this) {
@@ -56,6 +62,25 @@ public class MainActivity extends CameraActivity {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
+        Regresar();
+        try {
+            cascade = new File(getCacheDir(),"haarcascade_frontalface_default.xml");
+            if(!cascade.exists()){
+                InputStream ingresaArchivo = getAssets().open("haarcascade_frontalface_default.xml");
+                FileOutputStream archivoAbierto = new FileOutputStream(cascade);
+                byte[] buffer = new byte[4096];
+                int bytes;
+                while((bytes = ingresaArchivo.read(buffer))!=-1){
+                    archivoAbierto.write(buffer,0,bytes);
+                }
+                ingresaArchivo.close();
+                archivoAbierto.close();
+            }
+            DetectorDeCaras(cascade.getAbsolutePath());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
         mOpencv = (CameraBridgeViewBase) findViewById(R.id.openCV_surface_view);
         mOpencv.setVisibility(SurfaceView.VISIBLE);
         mOpencv.setCvCameraViewListener(cvCameraViewListener);
@@ -82,7 +107,7 @@ public class MainActivity extends CameraActivity {
         public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
             Mat CamaraColor = inputFrame.rgba();
             Mat CamaraGris = inputFrame.gray();
-            RedNeuronal(CamaraGris.getNativeObjAddr(),CamaraColor.getNativeObjAddr());
+            RedNeuronal2(CamaraGris.getNativeObjAddr(),CamaraColor.getNativeObjAddr());
             return CamaraColor;
         }
     };
@@ -115,9 +140,17 @@ public class MainActivity extends CameraActivity {
             mOpencv.disableView();
         }
     }
-    /**
-     * A native method that is implemented by the 'opencvapp' native library,
-     * which is packaged with this application.
-     */
-//    public native String stringFromJNI();
+
+
+    public void Regresar(){
+        Button regresar = (Button) findViewById(R.id.butRegresar);
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toy = new Intent(MainActivity.this,Menu.class);
+                startActivity(toy);
+
+            }
+        });
+    }
 }

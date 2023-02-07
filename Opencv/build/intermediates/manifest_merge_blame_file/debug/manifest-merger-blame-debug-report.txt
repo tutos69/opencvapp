@@ -8,4 +8,8 @@
 7        android:targetSdkVersion="33" />
 7-->/home/tutu/Escritorio/Octavo/Vision Por Computador/opencvapp/Opencv/java/AndroidManifest.xml
 8
-9</manifest>
+9    <uses-permission android:name="android.permission.CAMERA" />
+9-->/home/tutu/Escritorio/Octavo/Vision Por Computador/opencvapp/Opencv/java/AndroidManifest.xml:5:5-65
+9-->/home/tutu/Escritorio/Octavo/Vision Por Computador/opencvapp/Opencv/java/AndroidManifest.xml:5:22-62
+10
+11</manifest>

@@ -12,6 +12,7 @@ set(OpenCV_STATIC on)
 set(OpenCV_DIR /home/tutu/Escritorio/Octavo/opencv-4.5.4-android-sdk/OpenCV-android-sdk/sdk/native/jni/)
 find_package(OpenCV REQUIRED)
 include_directories(/home/tutu/Escritorio/Octavo/opencv-4.5.4-android-sdk/OpenCV-android-sdk/sdk/native/jni/include/)
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
