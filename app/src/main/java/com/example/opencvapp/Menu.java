@@ -49,7 +49,7 @@ public class Menu extends AppCompatActivity {
         HOG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toy = new Intent(Menu.this,Movimiento.class);
+                Intent toy = new Intent(Menu.this,Menu2.class);
                 startActivity(toy);
 
             }

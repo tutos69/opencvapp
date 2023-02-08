@@ -19,15 +19,15 @@
 using  namespace cv;
 
 extern "C"{
-    JNIEXPORT void JNICALL Java_com_example_opencvapp_MainActivity_RedNeuronal(JNIEnv* jniEnv, jobject,jlong Gris, jlong Color ){
-        Mat* imGris = (Mat*)Gris;
-        Mat* imColor = (Mat*)Color;
-        std::vector<Point> puntos;
-        goodFeaturesToTrack(*imGris,puntos,20,0.01,10,Mat(),3, false);
-        for (int i = 0; i < puntos.size(); ++i) {
-            circle(*imColor,puntos[i],10,Scalar(0,255,0),2);
-        }
-    }
+//    JNIEXPORT void JNICALL Java_com_example_opencvapp_MainActivity_RedNeuronal(JNIEnv* jniEnv, jobject,jlong Gris, jlong Color ){
+//        Mat* imGris = (Mat*)Gris;
+//        Mat* imColor = (Mat*)Color;
+//        std::vector<Point> puntos;
+//        goodFeaturesToTrack(*imGris,puntos,20,0.01,10,Mat(),3, false);
+//        for (int i = 0; i < puntos.size(); ++i) {
+//            circle(*imColor,puntos[i],10,Scalar(0,255,0),2);
+//        }
+//    }
 
     CascadeClassifier cascadeClassifier;
 //    FaceRecognizerSF ;
@@ -67,7 +67,7 @@ JNIEXPORT void JNICALL
         }
     }
 
-Mat frameAnterior2;
+Mat frameAnterior1;
 Mat restaBlanco;
 
 extern "C"
@@ -79,23 +79,69 @@ Java_com_example_opencvapp_Movimiento_MovimientoResta(JNIEnv *env, jobject thiz,
     Mat* imGris2 = (Mat*)gris;
     Mat imgis = imGris2->clone();
     Mat* resta;
-   if(frameAnterior2.empty()){
-       frameAnterior2 = imgis.clone();
+   if(frameAnterior1.empty()){
+       frameAnterior1 = imgis.clone();
    }
-
-
-
-    absdiff(* imGris2, frameAnterior2,*imGris2);
+    absdiff(* imGris2, frameAnterior1,*imGris2);
 //    equalizeHist(*imGris2, *imGris2);
-    frameAnterior2 = imgis.clone();
+    frameAnterior1 = imgis.clone();
 //    Ptr<CLAHE> clahe = createCLAHE();
 //    clahe->setClipLimit(2);
 //    clahe->apply(*imGris2, *imGris2);
-    Mat kernel;
-    kernel = cv::getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
-    cv::erode(*imGris2, *imGris2,kernel);
+//    Mat kernel;
+//    kernel = cv::getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
+//    cv::erode(*imGris2, *imGris2,kernel);
 
 
 
 }
+Mat frameAnterior2;
 
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_opencvapp_Movimiento1_MovimientoResta1(JNIEnv *env, jobject thiz, jlong gris,
+                                                        jlong frame_anterior) {
+    Mat* imGris2 = (Mat*)gris;
+    Mat imgis = imGris2->clone();
+    Mat* resta;
+    if(frameAnterior2.empty()){
+        frameAnterior2 = imgis.clone();
+    }
+    absdiff(* imGris2, frameAnterior2,*imGris2);
+    equalizeHist(*imGris2, *imGris2);
+    frameAnterior2 = imgis.clone();
+}
+
+Mat frameAnterior3;
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_opencvapp_Movimiento2_MovimientoResta2(JNIEnv *env, jobject thiz, jlong gris,jlong frame_anterior) {
+    Mat* imGris2 = (Mat*)gris;
+    Mat imgis = imGris2->clone();
+    Mat* resta;
+    if(frameAnterior3.empty()){
+        frameAnterior3 = imgis.clone();
+    }
+    absdiff(* imGris2, frameAnterior3,*imGris2);
+    Ptr<CLAHE> clahe = createCLAHE();
+    clahe->setClipLimit(2);
+    clahe->apply(*imGris2, *imGris2);
+    frameAnterior3 = imgis.clone();
+}
+
+Mat frameAnterior4;
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_opencvapp_Movimiento3_MovimientoResta3(JNIEnv *env, jobject thiz, jlong gris, jlong frame_anterior) {
+    Mat* imGris2 = (Mat*)gris;
+    Mat imgis = imGris2->clone();
+    Mat* resta;
+    if(frameAnterior4.empty()){
+        frameAnterior4 = imgis.clone();
+    }
+    absdiff(* imGris2, frameAnterior4,*imGris2);
+    Mat kernel;
+    kernel = cv::getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
+    cv::erode(*imGris2, *imGris2,kernel);
+    frameAnterior4 = imgis.clone();
+}

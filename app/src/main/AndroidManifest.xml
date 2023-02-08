@@ -28,6 +28,27 @@
         android:theme="@style/Theme.Opencvapp"
         tools:targetApi="31">
         <activity
+            android:name=".Movimiento3"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Movimiento2"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Movimiento1"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Menu2"
             android:exported="false">
             <meta-data
